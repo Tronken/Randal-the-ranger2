@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
 {
+    private List<Item> inventory = new List<Item>();
+
+    public void AddItem(string itemName, int quantity, Sprite itemSprite)
+    {
+        Debug.Log("Added " + quantity + " of " + itemName + " to inventory.");
+        // Add logic to store the item in your inventory system
+    }
     public GameObject InventoryMenu;
     private bool menuActivated;
 

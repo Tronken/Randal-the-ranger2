@@ -5,28 +5,34 @@ using UnityEngine;
 public class Item : MonoBehaviour
 {
     [SerializeField] private string itemName;
-
     [SerializeField] private int quantity;
-
     [SerializeField] private Sprite sprite;
 
     private InventoryManager inventoryManager;
+
     void Start()
     {
         inventoryManager = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        {
-            inventoryManager.AddItem(itemName, quantity, sprite);
-            Destroy(gameObject);
-        }
-    }
+        Debug.Log("Collision detected with: " + collision.gameObject.name);
 
-    public void AddItem(string itemName, int quantity, Sprite itemSprite)
-    {
-        Debug.Log("itemName = " + itemName + "quantity = " + quantity + "itemSprite = " + itemSprite);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player picked up item!");
+
+            if (inventoryManager != null)
+            {
+                inventoryManager.AddItem(itemName, quantity, sprite);
+                Debug.Log("Item added to inventory: " + itemName);
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogError("InventoryManager is not found!");
+            }
+        }
     }
 }
