@@ -7,13 +7,13 @@ public class InventoryManager : MonoBehaviour
     private List<Item> inventory = new List<Item>();
     public ItemSlot[] itemSlot;
 
-    public void AddItem(string itemName, int quantity, Sprite itemSprite)
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, string itemDescription)
     {
         for (int i = 0; i < itemSlot.Length;  i++)
         {
             if(itemSlot[i].isFull == false)
             {
-                itemSlot[i].AddItem(itemName, quantity, itemSprite);
+                itemSlot[i].AddItem(itemName, quantity, itemSprite, itemDescription);
                 return;
             }
         }
@@ -36,6 +36,15 @@ public class InventoryManager : MonoBehaviour
             Time.timeScale = 0;
             InventoryMenu.SetActive(true);
             menuActivated = true;
+        }
+    }
+
+    public void DeselectAllSlots()
+    {
+        for(int i = 0; i < itemSlot.Length; i++)
+        {
+            itemSlot[i].selectedShader.SetActive(false);
+            itemSlot[i].thisItemSelected = false;
         }
     }
 }
