@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rb;
 
+
     Vector2 movement;
 
 
@@ -16,13 +18,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Input
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        movement.x = UnityEngine.Input.GetAxisRaw("Horizontal");
+        movement.y = UnityEngine.Input.GetAxisRaw("Vertical");
+
     }
 
     private void FixedUpdate()
     {
         //Movement
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+
     }
 }
